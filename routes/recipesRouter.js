@@ -5,7 +5,7 @@ import { getAllRecipes } from "../controllers/recipeController.js";
 
 const recepiesRouter = Router()
 
-recepiesRouter.get('/recipe', getAllRecipes)
+recepiesRouter.get('/recipes', getAllRecipes)
 
 
 
