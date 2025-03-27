@@ -34,6 +34,11 @@ const recipeSchema = new Schema ({
         type: Number, // Nombre de portions
         required: true,
       },
+      category: {
+        type: String,
+        enum: ['Entrée', 'Plat principal', 'Dessert'], // Liste des catégories possibles
+        required: true,
+      },
       createdAt: {
         type: Date,
         default: Date.now, 
