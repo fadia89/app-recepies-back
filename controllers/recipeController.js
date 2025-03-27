@@ -15,6 +15,21 @@ export const getAllRecipes = async (req, res) => {
         }
 }
 
+export const getRecipeById = async (req, res) => {
+    const {id} = req.params
+    try{
+        const recipeByID = await Recipes.findById(id)
+        if (!recipeByID){
+            return res.status(404).json('Recette introuvable')
+        }
+        return res.status(200).json(recipeByID)
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json('Internal server error')
+    }
+}
+
 export const createRecipe = async (req, res) => {
     const {title,description,ingredients,instructions,preparation_Time,cooking_Time,servings,category,createdAt,user_Id} = req.body;
     console.log(req.body)
