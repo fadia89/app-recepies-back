@@ -48,4 +48,4 @@ const recipeSchema = new Schema ({
         ref: 'User'
     }
 })
-export default mongoose.model('Recipe', userSchema);
+export default mongoose.model('Recipe', recipeSchema);
