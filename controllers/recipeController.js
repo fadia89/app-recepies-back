@@ -27,3 +27,18 @@ export const createRecipe = async (req, res) => {
         return res.status(500).json('Internal server error')
     }
 }
+
+export const updateRecipe = async (req, res) => {
+    const {id} = req.params
+    try{
+        const recipeByID = await Recipes.findByIdAndUpdate(id, req.body, {new : true})
+        if (!recipeByID){
+            return res.status(404).json('Recette introuvable')
+        }
+        return res.json(recipeByID)
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json('Internal server error')
+    }
+}
