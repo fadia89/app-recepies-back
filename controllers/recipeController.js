@@ -42,3 +42,21 @@ export const updateRecipe = async (req, res) => {
         return res.status(500).json('Internal server error')
     }
 }
+
+export const deleteRecipe = async (req, res) => {
+    const {id} = req.params
+    try{
+        const recipeByID = await Recipes.findByIdAndDelete(id)
+        
+        if (!recipeByID){
+            return res.status(404).json('Recette introuvable')
+        }
+        if(deleteRecipe){
+            return res.status(204).json('Recette supprimé')
+        }
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json('Internal server error')
+    }
+}

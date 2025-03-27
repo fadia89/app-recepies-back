@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createRecipe, getAllRecipes, updateRecipe } from "../controllers/recipeController.js";
+import { createRecipe, deleteRecipe, getAllRecipes, updateRecipe } from "../controllers/recipeController.js";
 import verifyRecipeFields from "../middellewars/verifyRecipeFields.js";
 
 
@@ -12,6 +12,6 @@ recipesRouter.post('/recipes',verifyRecipeFields ,createRecipe)
 
 recipesRouter.put('/recipes/:id', updateRecipe)
 
-
+recipesRouter.delete('/recipes/:id',  deleteRecipe)
 
 export default recipesRouter
