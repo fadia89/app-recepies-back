@@ -1,15 +1,14 @@
 import { Router } from "express";
-import { getAllRecipes } from "../controllers/recipeController.js";
+import { createRecipe, getAllRecipes } from "../controllers/recipeController.js";
 
 
 
-const recepiesRouter = Router()
+const recipesRouter = Router()
 
-recepiesRouter.get('/recipe', getAllRecipes)
+recipesRouter.get('/recipes', getAllRecipes)
 
-
-
-
+recipesRouter.post('/recipes', createRecipe)
 
 
-export default recepiesRouter
+
+export default recipesRouter
