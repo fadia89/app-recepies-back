@@ -2,7 +2,9 @@ import express, { request, response } from 'express'
 import 'dotenv/config';
 import cors from 'cors';
 import connectDB from './dataBase/db.js';
-import recipesRouter from './routes/recipesRouter.js';
+import recepiesRouter from './routes/recipesRouter.js';
+import userRouter from './routes/usersRouter.js';
+import authRouter from './routes/authRouter.js';
 
 
 const app = express();
@@ -11,7 +13,8 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 app.use(cors())
-app.use('/api', recipesRouter)
+app.use('/api', userRouter,recepiesRouter, authRouter)
+
 
 
 connectDB()
