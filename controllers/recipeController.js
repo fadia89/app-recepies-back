@@ -30,6 +30,38 @@ export const getRecipeById = async (req, res) => {
     }
 }
 
+export const getRecipesByCategory = async (req, res) => {
+    const category = decodeURIComponent(req.params.category)
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Supprime les accents
+        .replace(/-/g, ' ') // Remplace les tirets par des espaces
+        .toLowerCase(); // Met en minuscule
+
+    // console.log("Category recherchée :", category)
+
+    try {
+        const recipes = await Recipes.find()
+        
+        // Filtrer en supprimant les accents des catégories existantes
+        const filteredRecipes = recipes.filter(recipe => {
+            const normalizedCategory = recipe.category
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Supprime les accents de la base de données
+                .toLowerCase(); // Met en minuscule pour éviter les problèmes de casse
+
+            return normalizedCategory === category
+        });
+
+        if (filteredRecipes.length === 0) {
+            return res.status(404).json('Aucune recette trouvée pour cette catégorie')
+        }
+
+        return res.status(200).json(filteredRecipes)
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json('Internal server error')
+    }
+}
+
+
 export const createRecipe = async (req, res) => {
     const {title,description,ingredients,instructions,preparation_Time,cooking_Time,servings,category,createdAt,user_Id} = req.body;
     console.log(req.body)
