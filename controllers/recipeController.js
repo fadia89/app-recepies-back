@@ -67,6 +67,7 @@ export const createRecipe = async (req, res) => {
     console.log(req.body)
     try{
         const newRecipe = await Recipes.create(req.body)
+        console.log(newRecipe)
         return res.status(201).json(newRecipe)
     }
     catch(err){

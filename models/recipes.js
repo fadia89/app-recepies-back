@@ -4,24 +4,20 @@ const { Schema } = mongoose;
 const recipeSchema = new Schema ({
     title: {
         type: String,
-        required: true, // Le titre de la recette est obligatoire
+        required: true,
       },
       description: {
         type: String,
-        required: true, // La description de la recette est obligatoire
+        required: true, 
       },
-      ingredients: [
-        {
-          name: String,
-          quantity: String,
-        }
-      ], // Un tableau d'ingrédients avec leur nom et quantité
-      instructions: [
-        {
-          step: Number,
-          instruction: String,
-        }
-      ], // Un tableau de l'ordre des étapes et les instructions
+      ingredients: {
+        type: String,
+        required: true
+      }, 
+      instructions: {
+        type: String,
+        required: true
+      }, 
       preparation_Time: {
         type: Number, 
         required: true,
@@ -31,12 +27,12 @@ const recipeSchema = new Schema ({
         required: true,
       },
       servings: {
-        type: Number, // Nombre de portions
+        type: Number, 
         required: true,
       },
       category: {
         type: String,
-        enum: ['Entrée', 'Plat principal', 'Dessert'], // Liste des catégories possibles
+        enum: ['Entrée', 'Plat principal', 'Dessert'], 
         required: true,
       },
       createdAt: {
