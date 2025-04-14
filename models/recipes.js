@@ -37,10 +37,11 @@ const recipeSchema = new Schema ({
       },
       createdAt: {
         type: Date,
-        default: Date.now, 
+        default: Date.now(), 
       },
       user_Id :{
         type: mongoose.Schema.Types.ObjectId,
+        require : true,
         ref: 'User'
     }
 })
