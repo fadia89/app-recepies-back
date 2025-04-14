@@ -15,6 +15,7 @@ const verifyUser = async (req,res , next) => {
 
     try{
         const verify = await jwt.verify(token,JWT_SECRET)
+        req.user = verify
         console.log(verify);
         
         if (!verify){

@@ -64,11 +64,12 @@ export const getRecipesByCategory = async (req, res) => {
 
 export const createRecipe = async (req, res) => {
     const {title,description,ingredients,instructions,preparation_Time,cooking_Time,servings,category,createdAt,user_Id} = req.body;
+    console.log(req.user)
     console.log(req.body)
     try{
-        const newRecipe = await Recipes.create(req.body)
+        const newRecipe = await Recipes.create({title,description,ingredients,instructions,preparation_Time,cooking_Time,servings,category,user_Id : req.user.id})
         console.log(newRecipe)
-        return res.status(201).json(newRecipe)
+        return res.status(201).json('La recette à bien été crée')
     }
     catch(err){
         console.log(err)

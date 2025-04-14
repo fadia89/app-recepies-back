@@ -1,11 +1,11 @@
 const verifyRecipeFields = async (req, res, next) => {
     try {
-      const {title,description,ingredients,instructions,preparation_Time,cooking_Time,servings,category,createdAt,user_Id} = req.body;
+      const {title,description,ingredients,instructions,preparation_Time,cooking_Time,servings,category} = req.body;
       console.log(req.body)
       // Vérification que tous les champs nécessaires sont présents
-      if (!title ||!description ||!ingredients ||!instructions ||!preparation_Time ||!cooking_Time ||!servings ||!category ||!user_Id ) {
-        return res.status(400).json({
-          message: 'Tous les champs (title,description,ingredients,instructions,preparation_Time,cooking_Time,servings,category,user_Id) sont nécessaires'
+      if (!title ||!description ||!ingredients ||!instructions ||!preparation_Time ||!cooking_Time ||!servings ||!category) {
+        return res.status(409).json({
+          message: 'Tous les champs (title,description,ingredients,instructions,preparation_Time,cooking_Time,servings,category) sont nécessaires'
         });
       }
   
