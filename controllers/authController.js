@@ -45,6 +45,7 @@ export const loginUser = async (req,res) => {
             return res.status(401).json({ message: 'Email or password invalid' }); 
         }
         const token = await jwt.sign({ id: user._id}, JWT_SECRET);
+        console.log(user.first_Name)
         return res.status(200).json({ message: `Welcome ${user.first_Name}`, token });
   
   
