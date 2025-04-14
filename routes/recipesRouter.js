@@ -6,9 +6,11 @@ import verifyRecipeFields from "../middellewars/verifyRecipeFields.js";
 
 const recipesRouter = Router()
 
+
 recipesRouter.get('/recipes', getAllRecipes)
 recipesRouter.get('/recipes/:id', getRecipeById)
 recipesRouter.get('/recipes/category/:category', getRecipesByCategory)
+
 
 recipesRouter.post('/recipes',verifyRecipeFields ,createRecipe)
 
