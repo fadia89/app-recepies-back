@@ -18,7 +18,7 @@ export const getAllRecipes = async (req, res) => {
 export const getRecipeById = async (req, res) => {
     const {id} = req.params
     try{
-        const recipeByID = await Recipes.findById(id)
+        const recipeByID = await Recipes.findById(id).populate(`user_Id`, `-password`)
         if (!recipeByID){
             return res.status(404).json('Recette introuvable')
         }
