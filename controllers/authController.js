@@ -5,7 +5,7 @@ import User from'../models/users.js';
  const JWT_SECRET = process.env.JWT_SECRET;
 
 export  const createUser = async (req, res) => {
-    const {first_Name, last_Name, email, password, created_at} = req.body;
+    const {first_Name, last_Name, email, password} = req.body;
     
         try{ 
             const emailverification = await User.findOne({email});
@@ -21,10 +21,10 @@ export  const createUser = async (req, res) => {
                 last_Name,
                 email,
                 password: hashedPassword ,
-                image:  '/public/images/' +  req.file.filename
+                image:  '/public/images/' +  req.file.filename 
 
             })
-            return res.status(201).json({message: `Welcom ${first_Name}`});
+            return res.status(201).json({message: `Welcom ${first_Name}`,userId: newUser._id,});
             
          
         }catch (err) {

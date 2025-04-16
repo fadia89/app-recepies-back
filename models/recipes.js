@@ -43,6 +43,10 @@ const recipeSchema = new Schema ({
         type: mongoose.Schema.Types.ObjectId,
         require : true,
         ref: 'User'
+    },
+    image: {
+      type: String
+
     }
 })
 export default mongoose.model('Recipe', recipeSchema);

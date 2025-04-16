@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { upload } from "../middellewars/uploadFile.js";
 
 
 
@@ -9,7 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 
 
-authRouter.post ('/register', createUser);
+authRouter.post ('/register', upload.single('image'), createUser);
   
 authRouter.post ('/login', loginUser);
 
