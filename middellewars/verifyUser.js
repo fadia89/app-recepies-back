@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken';
 const JWT_SECRET = process.env.JWT_SECRET;
 
 
-const verifyUser = async (req,res , next) => {
-    console.log(req)
+const verifyUser = async (req,res,next) => {
+    //console.log(req)
     
     const token = req.headers.authorization?.split(' ')[1];
   
@@ -15,13 +15,18 @@ const verifyUser = async (req,res , next) => {
 
     try{
         const verify = await jwt.verify(token,JWT_SECRET)
-        req.user = verify
+       
         console.log(verify);
         
         if (!verify){
             return res.status(405).json('Access denied')
         }
-       
+       // Vérifier le rôle de l'utilisateur
+       if (verify.role !=="admin"){
+        return res.status(403).json({ error: 'Insufficient permissions' });
+       }
+
+       req.user = verify
         next();
       
 

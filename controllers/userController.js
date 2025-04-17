@@ -47,12 +47,16 @@ export const getUsersProfile = async (req, res) => {
     }
 };
 
-export const updateUsers = async (req, res) => {
-  const {id} = req.params;
+export const updateUser = async (req, res) => {
+  const {id} = req.user;
+  if (!id) {
+    return res.status(400).json({ message: "ID manquant" });
+  }
+  
   const{first_Name,last_Name,email,password} = req.body;
   try{
       const user = await User.findById(id);
-      //console.log(eventByID)
+      //console.log(user)
       if(!user){
           return res.status(404).json({messages: 'User not found'});  
       }
@@ -61,9 +65,10 @@ export const updateUsers = async (req, res) => {
         last_Name: last_Name || user.last_Name,
         email: email || user.email,
         password: password || user.password,
+        image: req.file ? '/public/images/' + req.file.filename : user.image
           
-      })
-      return res.status(200).json({message: 'Usersuccessfully updated'});
+      },{ new: true })
+      return res.status(200).json({message: 'Usersuccessfully updated',user: updateUser });
 
   } catch(err) {
       console.log(err);

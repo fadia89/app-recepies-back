@@ -3,6 +3,7 @@ import { createRecipe, deleteRecipe, getAllRecipes, getRecipeById, getRecipesByC
 import verifyRecipeFields from "../middellewars/verifyRecipeFields.js";
 import verifyUser from "../middellewars/verifyUser.js";
 import { upload } from "../middellewars/uploadFile.js";
+import { checkAdminOrOwner } from "../middellewars/checkAdminOrOwner.js";
 
 
 
@@ -20,6 +21,6 @@ recipesRouter.post('/recipes',upload.single('image'),verifyRecipeFields, verifyU
 
 recipesRouter.put('/recipes/:id', updateRecipe)
 
-recipesRouter.delete('/recipes/:id',  deleteRecipe)
+recipesRouter.delete('/recipe/:id', verifyUser, deleteRecipe)
 
 export default recipesRouter

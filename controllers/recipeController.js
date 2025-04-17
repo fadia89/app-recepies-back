@@ -76,9 +76,11 @@ export const createRecipe = async (req, res) => {
             cooking_Time,
             servings,
             category,
-            image:  '/public/images/' +  req.file.filename ,
+            image: req.file ? `public/images/${req.file.filename}` : 'public/images/par_defaut.jpg',
+
             user_Id : req.user.id})
-        console.log(newRecipe)
+
+        //console.log(newRecipe)
         return res.status(201).json({message: 'La recette à bien été crée' , newRecipe})
     }
     catch(err){

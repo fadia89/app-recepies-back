@@ -27,6 +27,11 @@ const userSchema = new Schema ({
     },
     image : {
         type: String,
+    },
+    role : {
+        type: String,
+        enum:['admin', 'user'],
+        default: 'user'
     }
 })
 

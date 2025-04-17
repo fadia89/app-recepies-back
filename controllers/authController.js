@@ -21,7 +21,8 @@ export  const createUser = async (req, res) => {
                 last_Name,
                 email,
                 password: hashedPassword ,
-                image:  '/public/images/' +  req.file.filename 
+                image: req.file ? '/public/images/' + req.file.filename : '/public/images/par_defaut.jpg'
+
 
             })
             return res.status(201).json({message: `Welcom ${first_Name}`,userId: newUser._id,});
@@ -48,7 +49,9 @@ export const loginUser = async (req,res) => {
         if (!comparePassword){
             return res.status(401).json({ message: 'Email or password invalid' }); 
         }
-        const token = await jwt.sign({ id: user._id}, JWT_SECRET);
+        const token = await jwt.sign({ id: user._id, role: user.role}, JWT_SECRET);
+        
+        console.log(token)
         console.log(user.first_Name)
         return res.status(200).json({ message: `Welcome ${user.first_Name}`, token });
   
